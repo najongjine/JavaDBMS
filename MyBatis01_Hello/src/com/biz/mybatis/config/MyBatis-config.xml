@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<typeAliases>
+	<!-- DTO | VO 클래스의 별명 설정 -->
+		<typeAlias alias="Bdto" 
+		type="com.biz.mybatis.persistence.BookDTO"/>
+	</typeAliases>
+	<!-- enviroments:= mybatis에서 jdbc를 사용한 connection 들을 생성하고 관리할수 있도록 기본 설정값을 
+		지정하는 곳 -->
+	<environments default="development">
+		<!-- enviroment는 여러개를 지정해두고 필요에따라 선택해서 사용가능. -->
+		<environment id="development">
+			<transactionManager type="JDBC" />
+			<dataSource type="pooled">
+				<property name="driver" value="oracle.jdbc.OracleDriver" />
+				<property name="url"
+					value="jdbc:oracle:thin:@localhost:1521:xe" />
+				<property name="username" value="user4" />
+				<property name="password" value="user4" />
+			</dataSource>
+		</environment>
+	</environments>
+	<mappers>
+		<mapper resource="com/biz/mybatis/mapper/book-mapper.xml" />
+	</mappers>
+</configuration>
