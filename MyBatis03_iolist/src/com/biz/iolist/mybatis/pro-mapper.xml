@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.biz.iolist.persistence.dao.ProductDao">
+	<select id="selectAll" resultType="ProductDTO">
+		select * from tbl_product
+	</select>
+	<select id="findById" resultType="ProductDTO">
+		select * from tbl_product
+		where
+		p_code=#{p_code}
+	</select>
+	<select id="findByPName" resultType="ProductDTO">
+		select * from tbl_product
+		where
+		p_name like '%' || #{p_name} ||'%'
+	</select>
+	<insert id="insert" parameterType="ProductDTO">
+		insert into tbl_product(
+		P_CODE,
+		P_NAME,
+		P_IPRICE,
+		P_OPRICE,
+		P_VAT)
+		values (#{p_code},
+		#{p_name},
+		#{p_iprice},
+		#{p_oprice},
+		#{p_vat}
+		)
+	</insert>
+	<update id="update" parameterType="ProductDTO">
+		update tbl_product set
+		P_NAME=#{p_name},
+		P_IPRICE=#{p_iprice},
+		P_OPRICE=#{p_oprice},
+		P_VAT=#{p_vat}
+		where P_CODE=#{p_code}
+	</update>
+	<delete id="delete" parameterType="ProductDTO">
+		delete from tbl_product
+		where
+		P_CODE=#{p_code}
+	</delete>
+</mapper>
