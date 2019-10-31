@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.biz.rent.dao.BookDao">
+	<select id="selectAll" resultType="BookDTO">
+		select * from tbl_books
+	</select>
+	<select id="findById" resultType="BookDTO">
+		select * from tbl_books where
+		B_CODE=#{B_CODE}
+	</select>
+	<select id="findByBookName" resultType="BookDTO">
+		select * from tbl_books
+		where
+		B_NAME like '%'|| #{B_NAME}|| '%'
+	</select>
+	<select id="findByAuthName" resultType="BookDTO">
+		select * from tbl_books
+		where
+		B_AUTHER like '%'|| #{B_AUTHER}|| '%'
+	</select>
+	<select id="findByCompName" resultType="BookDTO">
+		select * from tbl_books
+		where
+		B_COMP like '%'|| #{b_comp}|| '%'
+	</select>
+	<select id="getMaxCode" resultType="String">
+		select max(B_CODE) from
+		tbl_books
+	</select>
+	<insert id="insert" parameterType="BookDTO">
+		insert into tbl_books(B_CODE,
+		B_NAME,
+		B_AUTHER,
+		B_COMP,
+		B_YEAR,
+		B_IPRICE,
+		B_RPRICE) values (#{b_code},
+		#{b_name},
+		#{b_auther},
+		#{b_comp},
+		#{b_year},
+		#{b_iprice},
+		#{b_rprice})
+	</insert>
+	<update id="update" parameterType="BookDTO">
+		update tbl_books set
+		B_NAME=#{b_name,jdbcType=VARCHAR},
+		B_AUTHER=#{b_auther,jdbcType=VARCHAR},
+		B_COMP=#{b_comp,jdbcType=VARCHAR},
+		B_YEAR=#{b_year,jdbcType=VARCHAR},
+		B_IPRICE=#{b_iprice,jdbcType=VARCHAR},
+		B_RPRICE=#{b_rprice,jdbcType=VARCHAR}
+		where B_CODE=#{b_code}
+	</update>
+	<delete id="delete" parameterType="BookDTO">
+		delete from tbl_books
+		where
+		B_CODE=#{B_CODE}
+	</delete>
+</mapper>
