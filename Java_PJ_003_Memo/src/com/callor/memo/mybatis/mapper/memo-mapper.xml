@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.callor.memo.dao.MemoDao">
+	<select id="selectAll" resultType="MemoDTO">
+		select * from tbl_memo
+	</select>
+	<select id="findById" resultType="MemoDTO">
+		select * from tbl_memo
+		where
+		ID=#{id}
+	</select>
+	<select id="findBySubj" resultType="MemoDTO">
+		select * from tbl_memo
+		where
+		M_SUBJECT like '%'||#{m_subject}||'%'
+	</select>
+	<select id="findByText" resultType="MemoDTO">
+		select * from tbl_memo
+		where
+		M_TEXT like '%'||#{m_text}||'%'
+	</select>
+	<insert id="insert" parameterType="MemoDTO">
+		insert into tbl_memo(
+		ID,
+		M_AUTH,
+		M_DATE,
+		M_SUBJECT,
+		M_TEXT,
+		M_PHOTO) values(
+		SEQ_TBL_MEMO.NEXTVAL,
+		#{m_auth,jdbcType=VARCHAR},
+		#{m_date,jdbcType=VARCHAR},
+		#{m_subject,jdbcType=VARCHAR},
+		#{m_text,jdbcType=VARCHAR},
+		#{m_photo,jdbcType=VARCHAR}
+		)
+	</insert>
+	<update id="update" parameterType="MemoDTO">
+		update tbl_memo set
+		M_AUTH=#{m_auth,jdbcType=VARCHAR},
+		M_DATE=	#{m_date,jdbcType=VARCHAR},
+		M_SUBJECT=#{m_subject,jdbcType=VARCHAR},
+		M_TEXT=#{m_text,jdbcType=VARCHAR},
+		M_PHOTO=#{m_photo,jdbcType=VARCHAR}
+		where ID=#{id}		
+	</update>
+	<delete id="delete" parameterType="MemoDTO">
+		delete from tbl_memo where ID=#{id}
+	</delete>
+</mapper>
+  
