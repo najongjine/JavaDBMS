@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.biz.cbt.Dao.CbtDao">
+	<select id="selectAll" resultType="CbtDTO">
+		select * from tbl_cbt
+	</select>
+	<select id="findById" resultType="CbtDTO">
+		select * from tbl_cbt where
+		CB_SEQ=#{cb_seq}
+	</select>
+	<insert id="insert" parameterType="CbtDTO">
+		insert into tbl_cbt(
+		CB_SEQ,
+		CB_QUESTION,
+		CB_ANSWER1,
+		CB_ANSWER2,
+		CB_ANSWER3,
+		CB_ANSWER4,
+		CB_CORRECT_ANSWER
+		) values (
+		SEQ_CBT.nextval,
+		#{cb_question},
+		#{cb_answer1},
+		#{cb_answer2},
+		#{cb_answer3},
+		#{cb_answer4},
+		#{cb_correct_answer}
+		)
+	</insert>
+	<update id="update" parameterType="CbtDTO">
+		update tbl_cbt set
+		CB_QUESTION =#{cb_question},
+		CB_ANSWER1 =#{cb_answer1},
+		CB_ANSWER2 =#{cb_answer2},
+		CB_ANSWER3 =#{cb_answer3},
+		CB_ANSWER4 =#{cb_answer4},
+		CB_CORRECT_ANSWER =#{cb_correct_answer}
+		where CB_SEQ=#{cb_seq}
+	</update>
+	<delete id="delete" parameterType="CbtDTO">
+		delete from tbl_cbt where
+		CB_SEQ=#{cb_seq}
+	</delete>
+</mapper>

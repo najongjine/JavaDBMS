@@ -1,0 +1,16 @@
+private static SqlSessionFactory sqlSessionFactory;
+	static {
+		String configFile="com/biz/sec/config/mybatis-config.xml";
+		InputStream is;
+		try {
+			is=Resources.getResourceAsStream(configFile);
+			SqlSessionFactoryBuilder builder=new SqlSessionFactoryBuilder();
+			sqlSessionFactory=builder.build(is);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	public static SqlSessionFactory getSqlSessionFactory() {
+		return sqlSessionFactory;
+	}
